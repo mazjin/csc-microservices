@@ -10,6 +10,9 @@ def main(req: func.HttpRequest, context: func.Context) -> func.HttpResponse:
         return func.HttpResponse(
             body=response, 
             status_code=200,
+            headers={
+                'Content-Disposition': 'attachment; filename="CharacterSheet.pdf"'
+            },
             mimetype="application/pdf"
         )
     else: 

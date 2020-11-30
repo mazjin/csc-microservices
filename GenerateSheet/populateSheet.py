@@ -23,10 +23,9 @@ def getCheckBoxValue(value):
 
 def getSkillMod(modifier, is_proficient=False, prof_bonus=0):
     skill_mod = modifier + (prof_bonus if is_proficient else 0)
-    return F"{'+' if skill_mod >=0 else '-'}{skill_mod}"
+    return F"{'+' if skill_mod >=0 else ''}{skill_mod}"
 
 def populateFields(character, fields):
-
     #general
     fields[0].V = F"{character['class']['name']} ({character['subclass']['name']}) {str(character['level'])}"
     fields[3].V = character['name']
@@ -42,7 +41,7 @@ def populateFields(character, fields):
     fields[97].V = str(10 + character['stats']['wis']['modifier'] + (character['prof_bonus'] if character['skills']['perception']['proficient'] else 0))
     fields[99].V = ', '.join([prof['name'] for prof in character['proficiencies']]) + '\n\n' + ', '.join([lang['name'] for lang in character['languages']])
     fields[105].V = '\n\n'.join([F"{feat['name']}: {' '.join(feat['desc'])}" for feat in character['features']])
-    
+
     ## stats totals
     fields[8].V = str(character['stats']['str']['total'])
     fields[17].V = str(character['stats']['dex']['total'])
